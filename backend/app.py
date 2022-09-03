@@ -1,8 +1,4 @@
-import sqlite3
-
 from flask import Flask
-
-connexion = sqlite3.connect("contacts.db")
 
 app = Flask(__name__)
 
