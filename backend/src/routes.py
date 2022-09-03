@@ -13,7 +13,6 @@ def create_contact():
     if not request.json:
         abort(400)  # noqa: F821
     contact = Contact(
-        id=request.json.get("id"),
         name=request.json.get("name"),
         email=request.json.get("email"),
         phone=request.json.get("phone"),
@@ -21,3 +20,9 @@ def create_contact():
     db.session.add(contact)
     db.session.commit()
     return jsonify(contact.to_json()), 201
+
+
+@app.route("/all", methods=["GET"])
+def get_contacts():
+    contacts = Contact.query.all()
+    return jsonify([contact.to_json() for contact in contacts])

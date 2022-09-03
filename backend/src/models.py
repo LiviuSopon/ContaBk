@@ -10,7 +10,6 @@ class Contact(db.Model):
 
     def to_json(self):
         return {
-            "id": self.id,
             "name": self.name,
             "email": self.email,
             "phone": self.phone,
