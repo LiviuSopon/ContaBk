@@ -1,7 +1,7 @@
 import os
 from . import create_app
 from . import db
-from models import Contact
+from .models import Contact
 from flask import jsonify
 from flask import request
 
