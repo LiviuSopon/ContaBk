@@ -26,3 +26,27 @@ def create_contact():
 def get_contacts():
     contacts = Contact.query.all()
     return jsonify([contact.to_json() for contact in contacts])
+
+
+@app.route("/<phone>", methods=["DELETE"])
+def delete_contact(phone):
+    contact = Contact.query.filter_by(phone=phone).first()
+    if contact is None:
+        abort(404)  # noqa: F821
+    db.session.delete(contact)
+    db.session.commit()
+    return jsonify({"result": True})
+
+
+@app.route("/<phone>", methods=["PUT"])
+def update_contact(phone):
+    if not request.json:
+        abort(400)  # noqa: F821
+    contact = Contact.query.get(phone)
+    if contact is None:
+        abort(404)  # noqa: F821
+    contact.name = request.json.get("name", contact.name)
+    contact.email = request.json.get("name", contact.name)
+    contact.phone = request.json.get("name", contact.name)
+    db.session.commit()
+    return jsonify(contact.to_json())
