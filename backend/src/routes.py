@@ -4,6 +4,7 @@ from . import db
 from .models import Contact
 from flask import jsonify
 from flask import request
+from flask import abort
 
 app = create_app(os.getenv("FLASK_CONFIG") or "default")
 
