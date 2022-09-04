@@ -43,7 +43,7 @@ def delete_contact(phone):
 def update_contact(phone):
     if not request.json:
         abort(400)  # noqa: F821
-    contact = Contact.query.get(phone)
+    contact = Contact.query.filter_by(phone=phone).first()
     if contact is None:
         abort(404)  # noqa: F821
     contact.name = request.json.get("name", contact.name)
