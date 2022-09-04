@@ -46,7 +46,7 @@ def update_contact(phone):
     if contact is None:
         abort(404)  # noqa: F821
     contact.name = request.json.get("name", contact.name)
-    contact.email = request.json.get("name", contact.name)
-    contact.phone = request.json.get("name", contact.name)
+    contact.email = request.json.get("email", contact.email)
+    contact.phone = request.json.get("phone", contact.phone)
     db.session.commit()
     return jsonify(contact.to_json())
