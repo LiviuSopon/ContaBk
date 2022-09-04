@@ -1,4 +1,4 @@
-# config.py
+# Config file for the different environment types.
 import os
 
 
