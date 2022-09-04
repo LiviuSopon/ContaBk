@@ -15,6 +15,8 @@ class BaseCase(unittest.TestCase):
         self.app = app
         self.client = app.test_client()
         self.db = db
+        with app.app_context():
+            db.create_all()
 
     def tearDown(self):
         with app.app_context():

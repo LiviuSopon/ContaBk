@@ -31,6 +31,3 @@ class TestAddingData(BaseCase):
         )
         print(req.data)
         print("status: ", req.status_code)
-
-
-# TO DO: Create a monolithic test with subtests. Asynchronous testing messes up the db.
