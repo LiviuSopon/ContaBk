@@ -1,5 +1,3 @@
-# import json
-
 from BaseCase import BaseCase
 from src.models import Contact  # noqa: E402
 
