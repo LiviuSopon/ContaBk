@@ -5,8 +5,11 @@ from .models import Contact
 from flask import jsonify
 from flask import request
 from flask import abort
+from flask_cors import CORS
 
 app = create_app(os.getenv("FLASK_CONFIG") or "default")
+cors = CORS(app)
+app.config["CORS_HEADERS"] = "Content-Type"
 
 
 @app.route("/add", methods=["POST"])
