@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import request
 from flask import abort
 from flask_cors import CORS
+from sqlalchemy.exc import IntegrityError
 
 app = create_app(os.getenv("FLASK_CONFIG") or "default")
 cors = CORS(app)
@@ -21,9 +22,13 @@ def create_contact():
         email=request.json.get("email"),
         phone=request.json.get("phone"),
     )
-    db.session.add(contact)
-    db.session.commit()
-    return jsonify(contact.to_json()), 201
+    try:
+        db.session.add(contact)
+        db.session.commit()
+        return jsonify(contact.to_json()), 201
+    except IntegrityError:
+        db.session.rollback()
+        abort(409)
 
 
 @app.route("/all", methods=["GET"])
